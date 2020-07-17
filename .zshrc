@@ -1,12 +1,11 @@
 ## Convenience aliasing
 alias ls='ls -lFh'
 
+
 ## Make Terminal Tabs reflect current working directory
-function tab_title {
-  DIR_NAME=${PWD##*/}
-  echo -ne "\033]0;${DIR_NAME}\007\c"
-}
-PROMPT_COMMAND="tab_title ; $PROMPT_COMMAND"
+# Make sure to set turn off all Termianl Preferences->Profile->Window->Title Options
+precmd () { print -Pn "\e]0;%~\a" } # title bar prompt
+
 
 ## Prompt coloring for Git
 function parse_git_branch() {
