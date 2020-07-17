@@ -4,7 +4,7 @@ progname=$0
 
 usage() {
   cat <<EOF
-Usage: $progname remote_address local_volume_name
+Usage: $progname [-c] remote_address local_volume_name
 EOF
   exit 0
 }
