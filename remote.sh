@@ -23,11 +23,11 @@ then
 fi
 
 remote_host=$1
-mount_name=$2
+volname=$2
 
-volname="/Volumes/$mount_name"
-sudo mkdir $volname 2> /dev/null
-sudo sshfs -o local,allow_other,defer_permissions,IdentityFile=~/.ssh/id_rsa -o volname=$mount_name $remote_host:/ $volname
+mount_point="/Volumes/$volname"
+sudo mkdir $mount_point 2> /dev/null
+sudo sshfs -o local,allow_other,defer_permissions,IdentityFile=~/.ssh/id_rsa -o volname=$volname $remote_host:/ $mount_point
 
 if [ "$connect" == "y" ]
 then
