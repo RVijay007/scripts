@@ -8,3 +8,8 @@
 |**link_scripts.sh**|Places symbolic links to the scripts in correct locations for global access, i.e. `~/` or `/usr/local/bin`.|
 
 If one does not wish to copy, you may make symbolic links via `ln -s <file1> <link1>`. `file1` MUST be an absolute path, e.g. `/Users/<username>/scripts/remote.sh` instead of `./remote.sh`. You can run `/link_script.sh` to automatically link the files in the correct locations for global access.
+
+
+## References
+1. [How I upgrade my Mac for development in Catalina macOS
+](https://dev.to/sakko/how-i-upgrade-my-mac-for-development-in-catalina-macos-33g1)
