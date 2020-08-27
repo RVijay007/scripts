@@ -26,7 +26,7 @@ remote_host=$1
 volname=$2
 
 mount_point="/Volumes/$volname"
-sudo mkdir $mount_point 2> /dev/null
+sudo mkdir -p $mount_point 2> /dev/null
 sudo sshfs -o local,allow_other,defer_permissions,IdentityFile=~/.ssh/id_rsa -o volname=$volname $remote_host:/ $mount_point
 
 if [ "$connect" == "y" ]
