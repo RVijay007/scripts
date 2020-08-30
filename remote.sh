@@ -4,15 +4,17 @@ progname=$0
 
 usage() {
   cat <<EOF
-Usage: $progname [-c] remote_address local_volume_name
+Usage: $progname [-c] [-r] remote_address local_volume_name
 EOF
   exit 0
 }
 
 connect="n"
-while getopts ":c:h?:" opt; do
+root="n"
+while getopts ":c:r:h?:" opt; do
   case $opt in
   c ) connect="y";shift 1 ;;
+  r ) root="y";shift 1 ;;
   h|\? ) usage >&2 ;;
   esac
 done
@@ -26,8 +28,33 @@ remote_host=$1
 volname=$2
 
 mount_point="/Volumes/$volname"
+sudo umount $mount_point 2> /dev/null
 sudo mkdir -p $mount_point 2> /dev/null
-sudo sshfs -o local,allow_other,defer_permissions,IdentityFile=~/.ssh/id_rsa -o volname=$volname $remote_host:/ $mount_point
+
+perm="$USER:staff"
+sudo chown $perm $mount_point
+
+remote_user=$(echo $USER | sed 's/:.*//')
+# Exploring SUDO privilages for the logged in user, but not able to get working between Mac and Ubuntu
+# -o sftp_server="/usr/bin/sudo -u ragu /usr/lib/openssh/sftp-server" 
+sshfs -o local,allow_other,defer_permissions,IdentityFile=~/.ssh/id_rsa -o volname=$volname $remote_host:/home/$remote_user $mount_point
+
+if [ "$root" == "y" ]
+then
+    echo "Mounting Root"
+    rootname="Root"
+    volname_root="$volname\_$rootname"
+    
+    ip_addr=$(echo $remote_host | sed 's/.*@//')
+    remote_host_root="root@$ip_addr"
+    
+    mount_point_root="$mount_point"+"_"+"$rootname"
+    sudo umount $mount_point_root 2> /dev/null
+    sudo mkdir -p $mount_point_root 2> /dev/null
+    
+    echo "SSHFS as root"
+    sudo sshfs -o local,allow_other,defer_permissions,IdentityFile=~/.ssh/id_rsa -o volname=$volname_root $remote_host_root:/ $mount_point_root
+fi
 
 if [ "$connect" == "y" ]
 then
