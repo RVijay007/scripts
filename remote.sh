@@ -15,7 +15,6 @@ root="n"
 # https://stackoverflow.com/questions/192249/how-do-i-parse-command-line-arguments-in-bash
 OPTIND=1
 while getopts "crh?:" opt; do
-  echo "Option: $1"
   case $opt in
   c ) connect="y" ;;
   r ) root="y" ;;
@@ -23,8 +22,8 @@ while getopts "crh?:" opt; do
   esac
 done
 shift $((OPTIND-1))
-echo "Connect: $connect"
-echo "Root: $root"
+#echo "Connect: $connect"
+#echo "Root: $root"
 
 if [ $# -lt 2 ]
 then
