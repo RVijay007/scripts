@@ -11,13 +11,20 @@ EOF
 
 connect="n"
 root="n"
-while getopts ":c:r:h?:" opt; do
+
+# https://stackoverflow.com/questions/192249/how-do-i-parse-command-line-arguments-in-bash
+OPTIND=1
+while getopts "crh?:" opt; do
+  echo "Option: $1"
   case $opt in
-  c ) connect="y";shift 1 ;;
-  r ) root="y";shift 1 ;;
+  c ) connect="y" ;;
+  r ) root="y" ;;
   h|\? ) usage >&2 ;;
   esac
 done
+shift $((OPTIND-1))
+echo "Connect: $connect"
+echo "Root: $root"
 
 if [ $# -lt 2 ]
 then
@@ -41,7 +48,6 @@ sshfs -o local,allow_other,defer_permissions,IdentityFile=~/.ssh/id_rsa -o volna
 
 if [ "$root" == "y" ]
 then
-    echo "Mounting Root"
     rootname="Root"
     volname_root="$volname\_$rootname"
     
@@ -52,11 +58,10 @@ then
     sudo umount $mount_point_root 2> /dev/null
     sudo mkdir -p $mount_point_root 2> /dev/null
     
-    echo "SSHFS as root"
     sudo sshfs -o local,allow_other,defer_permissions,IdentityFile=~/.ssh/id_rsa -o volname=$volname_root $remote_host_root:/ $mount_point_root
 fi
 
 if [ "$connect" == "y" ]
 then
-    ssh $1
+    ssh $remote_host
 fi
