@@ -55,3 +55,4 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+export PATH="/opt/homebrew/bin/git-lfs:/opt/homebrew/opt/python@3.8/bin:$PATH"

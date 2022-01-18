@@ -72,10 +72,10 @@ then
     # echo $remote_host_root
     # echo $mount_point_root
     # echo "-----------------------"
-    sshfs -o local,allow_other,defer_permissions,IdentityFile=~/.ssh/id_rsa -o volname=$volname_root $remote_host_root:/ $mount_point_root
+    sshfs -o local,allow_other,defer_permissions,IdentityFile=~/.ssh/id_ed25519 -o volname=$volname_root $remote_host_root:/ $mount_point_root
 fi
 
 if [ "$connect" == "y" ]
 then
-    ssh $remote_host
+    ssh -X $remote_host
 fi
