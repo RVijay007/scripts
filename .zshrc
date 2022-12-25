@@ -39,20 +39,4 @@ zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}
 zstyle ':completion:*' list-suffixes
 zstyle ':completion:*' expand prefix suffix
 
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/ragu/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/Users/ragu/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/Users/ragu/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/Users/ragu/miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
 export PATH="/opt/homebrew/bin/git-lfs:/opt/homebrew/bin/:/opt/homebrew/opt/python@3.8/bin:$PATH"
