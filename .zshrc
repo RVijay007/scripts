@@ -1,6 +1,9 @@
 ## Convenience Aliasing
 alias ls='ls -lFh'
+alias yt-dlp='yt-dlp --all-subs -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best"'
 
+## Custom PATH changes
+export PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
 
 ## Export Paths
 # Requires NVM (Node Version Manager): `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.1/install.sh | bash`
@@ -56,3 +59,9 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+# Use awscli v1 for AWS Snow Family Devices (max supported is v1.16.14)
+# brew install awscli@1
+export PATH="/opt/homebrew/opt/awscli@1/bin:$PATH"
+
+# Created by `pipx` on 2023-10-24 20:16:23
+export PATH="$PATH:/Users/ragu/.local/bin"
