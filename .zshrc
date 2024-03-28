@@ -1,6 +1,6 @@
 ## Convenience Aliasing
 alias ls='ls -lFh'
-alias yt-dlp='yt-dlp --all-subs -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best"'
+alias yt-dlp='yt-dlp --sub-lang en-orig,en --sub-format best --write-auto-sub -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best"'
 
 ## Custom PATH changes
 export PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
